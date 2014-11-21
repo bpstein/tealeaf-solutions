@@ -1,4 +1,4 @@
-# OOP in Ruby
+# OOP in Ruby - first lecture 
 
 # 1. classes and objects
 # 2. methods contain behaviors
