@@ -1,3 +1,6 @@
+# 1. Cannot instantiate a module
+# 2. Can use them for mix-ins to extract common behaviour, and use them for namespacing
+
 class Animal
 	attr_accessor :name
 
@@ -14,7 +17,27 @@ class Animal
 	end
 end
 
-class Dog < Animal
+class Mammal < Animal
+	def warm_blooded?
+		true
+	end
+end
+
+# In order to use this module, your class must respond to a "name" method call
+module Fetchable
+	def fetch
+		"#{name} is fetching!"
+	end
+end
+
+module Swimmable
+	def swim
+		"I'm swimming!"
+	end
+end
+
+class Dog < Mammal
+	include Swimmable
 	def fetch 
 		"#{name} is fetching!"
 	end
@@ -24,7 +47,7 @@ class Dog < Animal
 	end
 end
 
-class Cat < Animal 
+class Cat < Mammal 
 	def speak
 		"#{name} is meowing!"
 	end
@@ -32,9 +55,12 @@ end
 
 teddy = Dog.new('teddy')
 puts teddy.name
+puts teddy.swim
+puts teddy.fetch
 puts teddy.eat
 puts teddy.fetch
 puts teddy.speak
+puts teddy.warm_blooded?
 
 kitty = Cat.new('kitty')
 puts kitty.name
